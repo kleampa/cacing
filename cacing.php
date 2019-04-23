@@ -7,7 +7,7 @@ $refresh_in = 180; //seconds
 $alert = 'https://notificationsounds.com/soundfiles/6c524f9d5d7027454a783c841250ba71/file-23_applause.mp3'; //mp3 path
 
 $search_in_subject = array();
-$search_in_subject[] = 'DGT Commision';
+$search_in_subject[] = 'DGT Commission';
 $search_in_subject[] = 'You have generated a new';
 $search_in_subject[] = 'Ai inregistrat un comision';
 
