@@ -155,7 +155,7 @@ imap_close($inbox);
     }, 1000);
 
     setTimeout(function(){
-        document.location.href='<?=basename($_SERVER['PHP_SELF'])?>?since=<?=time()?>';
+        document.location.href='<?=basename($_SERVER['PHP_SELF'])?>?since=<?=time()-$refresh_in?>';
     }, <?=$refresh_in*1000?>);
 </script>
 </body>
