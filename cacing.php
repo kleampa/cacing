@@ -1,5 +1,6 @@
 <?php
 /* settings you can change */
+date_default_timezone_set("America/Phoenix"); //de pus identic cu al serverului de mail
 $hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
 $username = 'email@email.com';
 $password = 'parola';
@@ -7,9 +8,9 @@ $refresh_in = 180; //seconds
 $alert = 'https://notificationsounds.com/soundfiles/6c524f9d5d7027454a783c841250ba71/file-23_applause.mp3'; //mp3 path
 
 $search_in_subject = array();
-$search_in_subject[] = 'DGT Commission';
-$search_in_subject[] = 'You have generated a new';
-$search_in_subject[] = 'Ai inregistrat un comision';
+$search_in_subject[] = 'DGT'; //dognet
+$search_in_subject[] = 'You have generated a new'; //2performant
+$search_in_subject[] = 'Ai inregistrat un comision'; //2performant
 
 /* do not change */
 $since = ($_GET['since'] == "") ? strtotime("-1 hour") : $_GET['since'];
@@ -17,9 +18,8 @@ $valid_emails=0;
 
 /* utility */
 function strposa($haystack, $needle, $offset=0) {
-    if(!is_array($needle)) $needle = array($needle);
     foreach($needle as $query) {
-        if(strpos($haystack, $query, $offset) !== false) return true; // stop on first true result
+        if(strpos($haystack, $query, $offset) !== false) { return true; }
     }
     return false;
 }
@@ -118,6 +118,8 @@ imap_close($inbox);
             else {
                 echo'
                 <div>
+                    <p class="grey small">Verificăm mailuri mai noi de '.date('Y-m-d H:i:s',$since).'</p>
+                    <br/>
                     <h1>CaCING!</h1>
                     <p class="lead">Număr de comisioane: '.$valid_emails.'</p>
                     <br/>
@@ -155,7 +157,7 @@ imap_close($inbox);
     }, 1000);
 
     setTimeout(function(){
-        document.location.href='<?=basename($_SERVER['PHP_SELF'])?>?since=<?=$since?>';
+        document.location.href='<?=basename($_SERVER['PHP_SELF'])?>?since=<?=$since+$refresh_in?>';
     }, <?=$refresh_in*1000?>);
 </script>
 </body>
